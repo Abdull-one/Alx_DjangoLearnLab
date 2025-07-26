@@ -15,4 +15,17 @@ class CustomUserAdmin(UserAdmin):
     )
 
 admin.site.register(CustomUser, CustomUserAdmin)
+from django.contrib.auth.decorators import permission_required
+from django.shortcuts import render
+from .models import Article
+
+@permission_required('accounts.can_view', raise_exception=True)
+def view_articles(request):
+    articles = Article.objects.all()
+    return render(request, 'accounts/view_articles.html', {'articles': articles})
+
+@permission_required('accounts.can_create', raise_exception=True)
+def create_article(request):
+    # simplified logic
+    return render(request, 'accounts/create_article.html')
 
