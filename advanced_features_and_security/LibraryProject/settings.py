@@ -58,6 +58,8 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'relationship_app.CustomUser'
+'LibraryProject.middleware.ContentSecurityPolicyMiddleware',
+
 
 LOGIN_REDIRECT_URL = 'list_books'
 LOGOUT_REDIRECT_URL = 'login'
@@ -91,3 +93,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEBUG = False
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']  
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
