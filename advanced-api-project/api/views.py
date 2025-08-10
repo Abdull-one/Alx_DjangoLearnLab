@@ -1,3 +1,31 @@
+from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
+from .models import Book
+from .serializers import BookSerializer
+from rest_framework import generics, permissions
+
+
+class BookListView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [permissions.AllowAny]
+
+    # Filtering, Searching, Ordering
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter
+    ]
+
+    # Fields for filtering
+    filterset_fields = ['title', 'author__name', 'publication_year']
+
+    # Fields for searching
+    search_fields = ['title', 'author__name']
+
+    # Fields for ordering
+    ordering_fields = ['title', 'publication_year']
+    ordering = ['title']  # Default ordering
 
 from rest_framework import generics, permissions
 from .models import Book
