@@ -7,7 +7,16 @@
   <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
 </head>
 <body>
-  <header><h1>Daburam Blog</h1></header>
+  <header><h1>Daburam blog</h1></header>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
   <main>{% block content %}{% endblock %}</main>
 </body>
 </html>
